@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { type RootState } from '../Store';
 import { Theme } from '../Store/themeSlice';
+import { Link } from 'react-router-dom';
 
 const features = [
   {
@@ -44,18 +45,18 @@ export default function HomePage() {
           🌍 Explore countries, 📊 compare stats, and 🧠 challenge your knowledge — all in one place.
         </p>
         <div className="flex gap-4 mt-8">
-          <a
-            href="/explore"
+          <Link
+            to="/explore"
             className="px-6 py-3 bg-blue-600 text-white rounded-xl text-lg hover:bg-blue-700 shadow-md transition"
           >
             Start Exploring
-          </a>
-          <a
-            href="/quiz"
+          </Link>
+          <Link
+            to="/quiz"
             className="px-6 py-3 border border-blue-600 text-blue-600 rounded-xl text-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition"
           >
             Take a Quiz
-          </a>
+          </Link>
         </div>
       </section>
 
