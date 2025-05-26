@@ -1,4 +1,3 @@
-// src/pages/ComparePage.tsx
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { type RootState } from "../Store";
