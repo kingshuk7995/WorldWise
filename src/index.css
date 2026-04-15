@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #3b82f6;
+  --font-sans: "Outfit", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
 html {
   transition: background-color 0.3s, color 0.3s;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+  .glass-dark {
+    @apply bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 shadow-2xl;
+  }
 }

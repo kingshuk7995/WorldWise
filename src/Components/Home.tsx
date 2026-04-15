@@ -3,22 +3,32 @@ import { useSelector } from 'react-redux';
 import { type RootState } from '../Store';
 import { Theme } from '../Store/themeSlice';
 import { Link } from 'react-router-dom';
+import { Globe, Map, Target, ArrowRight } from 'lucide-react';
 
 const features = [
   {
-    title: "🌐 Country Data",
-    description: "Access GDP, population, borders, languages, and more. All live and visual.",
-    image: "/images/country-data.jpg",
+    title: "Country Data Insights",
+    description: "Dive deep into GDP, population trends, borders, and spoken languages.",
+    icon: <Globe className="w-10 h-10 text-blue-500" />,
+    link: "/explore",
+    color: "bg-blue-500/10 border-blue-500/20",
+    delay: 0.1,
   },
   {
-    title: "🧠 Interactive Quizzes",
-    description: "Test your knowledge of flags, capitals, and borders with gamified quizzes.",
-    image: "/images/quiz.jpg",
+    title: "Interactive Geography",
+    description: "Visually compare countries across economy, size, and demographics.",
+    icon: <Map className="w-10 h-10 text-emerald-500" />,
+    link: "/compare",
+    color: "bg-emerald-500/10 border-emerald-500/20",
+    delay: 0.2,
   },
   {
-    title: "⚖️ Compare Countries",
-    description: "Visually compare countries across economy, geography, and culture.",
-    image: "/images/compare.jpg",
+    title: "Knowledge Challenges",
+    description: "Test your wits with dynamic quizzes on capitals, flags, and more.",
+    icon: <Target className="w-10 h-10 text-yellow-500" />,
+    link: "/quiz",
+    color: "bg-yellow-500/10 border-yellow-500/20",
+    delay: 0.3,
   },
 ];
 
@@ -27,65 +37,99 @@ export default function HomePage() {
   const isDark = theme === Theme.Dark;
 
   return (
-    <main className="w-full">
+    <main className={`min-h-screen relative overflow-hidden transition-colors duration-500 ${isDark ? 'bg-gray-950 text-gray-100' : 'bg-[#f8fafc] text-slate-900'}`}>
+      
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-500/20 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-emerald-500/20 blur-[120px] pointer-events-none" />
+
       {/* Hero Section */}
-      <section
-        className={`min-h-[70vh] flex flex-col items-center justify-center px-6 text-center ${
-          isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-100 to-white'
-        }`}
-      >
-        <h1
-          className={`text-5xl font-extrabold mb-4 tracking-wide ${
-            isDark ? 'text-yellow-300 drop-shadow-lg' : 'text-blue-700'
-          }`}
+      <section className="relative z-10 pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border bg-white/5 border-gray-300/30 backdrop-blur-md shadow-sm"
         >
-          Discover the World, Smarter.
-        </h1>
-        <p className={`text-xl max-w-2xl ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-          🌍 Explore countries, 📊 compare stats, and 🧠 challenge your knowledge — all in one place.
-        </p>
-        <div className="flex gap-4 mt-8">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+          </span>
+          <span className="text-sm font-medium">Live Global Data API</span>
+        </motion.div>
+
+        <motion.h1 
+          className="text-6xl md:text-8xl font-extrabold tracking-tight mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        >
+          Discover the World, <br />
+          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isDark ? 'from-blue-400 to-emerald-400' : 'from-blue-600 to-emerald-600'}`}>
+            Smarter.
+          </span>
+        </motion.h1>
+
+        <motion.p 
+          className="text-xl md:text-2xl max-w-2xl font-light mb-12 opacity-80"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          An immersive platform to explore nations, compare vital statistics, and challenge your geographical knowledge.
+        </motion.p>
+
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
           <Link
             to="/explore"
-            className="px-6 py-3 bg-blue-600 text-white rounded-xl text-lg hover:bg-blue-700 shadow-md transition"
+            className={`group flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 ${
+              isDark ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'
+            }`}
           >
-            Start Exploring
+            Start Exploring <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             to="/quiz"
-            className="px-6 py-3 border border-blue-600 text-blue-600 rounded-xl text-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition"
+            className={`flex items-center gap-2 px-8 py-4 rounded-2xl text-lg font-semibold border transition-all hover:-translate-y-1 ${
+              isDark ? 'border-gray-700 bg-gray-900/50 hover:bg-gray-800' : 'border-gray-300 bg-white/50 hover:bg-white'
+            } backdrop-blur-sm`}
           >
             Take a Quiz
           </Link>
+        </motion.div>
+      </section>
+
+      {/* Feature Grid */}
+      <section className="relative z-10 px-6 pb-32 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((feature, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: feature.delay }}
+              whileHover={{ y: -5 }}
+              className={`p-8 rounded-3xl border backdrop-blur-xl transition-all shadow-sm hover:shadow-md ${feature.color} ${isDark ? 'bg-gray-900/40 border-gray-800' : 'bg-white/60 border-gray-200'}`}
+            >
+              <div className="mb-6 p-4 rounded-2xl inline-block bg-white/50 dark:bg-black/20 backdrop-blur-md shadow-sm border border-black/5 dark:border-white/5">
+                {feature.icon}
+              </div>
+              <h3 className="text-2xl font-bold mb-3 tracking-tight">{feature.title}</h3>
+              <p className="opacity-75 leading-relaxed mb-6 font-medium">{feature.description}</p>
+              <Link to={feature.link} className="inline-flex items-center gap-2 font-semibold hover:opacity-70 transition-opacity">
+                Explore <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </section>
-
-      {/* Feature Sections */}
-      {features.map((feature, idx) => (
-        <motion.section
-          key={idx}
-          className="min-h-[100vh] snap-start relative bg-cover bg-center bg-no-repeat flex items-center justify-center px-6"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${feature.image}')`,
-          }}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: idx * 0.2 }}
-        >
-          <div className="text-center text-white max-w-2xl px-4">
-            <h2 className="text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">{feature.title}</h2>
-            <p className="text-xl md:text-2xl text-gray-200 font-light drop-shadow-sm leading-relaxed">
-              {feature.description}
-            </p>
-          </div>
-        </motion.section>
-      ))}
-
-      {/* Footer */}
-      <section className="text-center py-10 text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-900">
-        Built with ❤️ using React, Vite, Tailwind, and Framer Motion.
-      </section>
+      
     </main>
   );
 }
